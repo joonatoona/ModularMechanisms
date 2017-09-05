@@ -20,3 +20,6 @@ build
 # other
 eclipse
 run
+
+# Windows is dumb
+Thmbs.db
