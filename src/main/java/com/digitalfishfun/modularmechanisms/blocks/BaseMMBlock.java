@@ -19,10 +19,10 @@ public class BaseMMBlock extends Block {
 
         this.name = name;
 
-        this.setUnlocalizedName(name);
-        this.setRegistryName(ModularMechanisms.MODID, name);
-        this.setHardness(2.0f);
-        this.setCreativeTab(ModularMechanisms.creativeTab);
+        setUnlocalizedName(name);
+        setRegistryName(ModularMechanisms.MODID, name);
+        setHardness(2.0f);
+        setCreativeTab(ModularMechanisms.creativeTab);
     }
 
     public Item createItemBlock() {

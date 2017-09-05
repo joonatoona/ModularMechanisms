@@ -6,6 +6,7 @@
 package com.digitalfishfun.modularmechanisms.client;
 
 import com.digitalfishfun.modularmechanisms.ModularMechanisms;
+import com.digitalfishfun.modularmechanisms.items.ItemRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,6 @@ public class MMTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        // TODO: Different creative tab icon
-        return new ItemStack(Blocks.ANVIL);
+        return new ItemStack(ItemRegistry.multiblockMaker);
     }
 }

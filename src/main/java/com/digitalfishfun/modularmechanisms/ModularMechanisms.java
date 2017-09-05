@@ -7,12 +7,14 @@ package com.digitalfishfun.modularmechanisms;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
 import com.digitalfishfun.modularmechanisms.client.MMTab;
+import com.digitalfishfun.modularmechanisms.items.ItemRegistry;
 import com.digitalfishfun.modularmechanisms.proxy.CommonProxy;
 import com.digitalfishfun.modularmechanisms.utils.MMLogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -40,6 +42,7 @@ public class ModularMechanisms
 
     }
 
+    // TODO: Move this into a separate class
     @Mod.EventBusSubscriber
     public static class RegistrationHandler {
         @SubscribeEvent
@@ -52,12 +55,14 @@ public class ModularMechanisms
         public static void registerItems(RegistryEvent.Register<Item> evt) {
             MMLogger.info("Registering Items");
             BlockRegistry.registerItems(evt.getRegistry());
+            ItemRegistry.register(evt.getRegistry());
         }
 
         @SubscribeEvent
         public static void registerItemModels(ModelRegistryEvent evt) {
             MMLogger.info("Registering Models");
             BlockRegistry.registerModels();
+            ItemRegistry.registerModels();
         }
     }
 }

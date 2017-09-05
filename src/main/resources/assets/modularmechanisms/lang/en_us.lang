@@ -3,3 +3,6 @@ itemGroup.modularmechanisms=Modular Mechanisms
 
 # Blocks
 tile.press_core.name=Modular Press Core
+
+# Items
+item.multiblock_maker.name=Insert Creative Name
