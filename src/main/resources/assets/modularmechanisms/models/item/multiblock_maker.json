@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "modularmachines:items/multiblock_maker"
+    "layer0": "modularmechanisms:items/multiblock_maker"
   }
 }

@@ -7,7 +7,6 @@ package com.digitalfishfun.modularmechanisms.items;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumActionResult;
@@ -19,7 +18,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,13 +31,13 @@ public class ItemMultiblockMaker extends BaseMMItem {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float x, float y, float z) {
         if (world.isRemote) {
             if (world.getBlockState(pos).getBlock().equals(BlockRegistry.pressCore)) {
-                checkMultiblock(world, pos, player);
-
-                player.swingArm(hand);
-                return EnumActionResult.PASS;
+                if (checkMultiblock(world, pos, player) > -1) {
+                    player.swingArm(hand);
+                    return EnumActionResult.PASS;
+                }
+                return EnumActionResult.FAIL;
             }
         }
-
         return EnumActionResult.FAIL;
     }
 
@@ -60,6 +58,8 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
         if (succBuild < 0) {
             player.sendStatusMessage(generateError(), true);
+        } else {
+            player.sendStatusMessage(new TextComponentString("TODO: Build MultiBlock"), true);
         }
 
         return succBuild;
