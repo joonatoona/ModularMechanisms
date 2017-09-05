@@ -1,0 +1,15 @@
+[
+{
+  "modid": "modularmachines",
+  "name": "Modular Machines",
+  "description": "Can someone else please write this for me",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["joonatoona", "mimiisbirb"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
