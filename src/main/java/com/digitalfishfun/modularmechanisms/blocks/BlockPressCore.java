@@ -1,6 +1,6 @@
-package com.digitalfishfun.modularmachines.blocks;
+package com.digitalfishfun.modularmechanisms.blocks;
 
-import com.digitalfishfun.modularmachines.ModularMachines;
+import com.digitalfishfun.modularmechanisms.ModularMechanisms;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +13,7 @@ public class BlockPressCore extends Block {
     public BlockPressCore() {
         super(Material.IRON);
         this.setUnlocalizedName("press_core");
-        this.setRegistryName(ModularMachines.MODID, "press_core");
+        this.setRegistryName(ModularMechanisms.MODID, "press_core");
         this.setHardness(2.0f);
         this.setCreativeTab(CreativeTabs.MISC);
     }
@@ -23,6 +23,6 @@ public class BlockPressCore extends Block {
     }
 
     public void registerItemModel(Item itemBlock) {
-        ModularMachines.proxy.registerItemRenderer(itemBlock, 0, "press_core");
+        ModularMechanisms.proxy.registerItemRenderer(itemBlock, 0, "press_core");
     }
 }

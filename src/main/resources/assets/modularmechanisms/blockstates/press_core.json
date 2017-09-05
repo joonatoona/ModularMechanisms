@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "modularmachines:blocks/press_core"
+      "all": "modularmechanisms:blocks/press_core"
     }
   },
   "variants": {

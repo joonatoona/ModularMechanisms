@@ -1,4 +1,4 @@
-package com.digitalfishfun.modularmachines.proxy;
+package com.digitalfishfun.modularmechanisms.proxy;
 
 import net.minecraft.item.Item;
 

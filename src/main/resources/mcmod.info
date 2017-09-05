@@ -1,7 +1,7 @@
 [
 {
-  "modid": "modularmachines",
-  "name": "Modular Machines",
+  "modid": "modularmechanisms",
+  "name": "Modular Mechanisms",
   "description": "Can someone else please write this for me",
   "version": "${version}",
   "mcversion": "${mcversion}",

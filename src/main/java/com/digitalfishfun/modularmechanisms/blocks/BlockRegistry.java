@@ -1,4 +1,4 @@
-package com.digitalfishfun.modularmachines.blocks;
+package com.digitalfishfun.modularmechanisms.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
