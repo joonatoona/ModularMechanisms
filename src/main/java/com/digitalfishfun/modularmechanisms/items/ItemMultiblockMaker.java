@@ -6,8 +6,8 @@
 package com.digitalfishfun.modularmechanisms.items;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
-import com.digitalfishfun.modularmechanisms.utils.MMLogger;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumActionResult;
@@ -19,7 +19,9 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ItemMultiblockMaker extends BaseMMItem {
 
@@ -42,24 +44,56 @@ public class ItemMultiblockMaker extends BaseMMItem {
     }
 
     private int checkMultiblock(World world, BlockPos pos, EntityPlayer player) {
-        Block above = world.getBlockState(pos.up()).getBlock();
-        Block below = world.getBlockState(pos.down()).getBlock();
-        Block north = world.getBlockState(pos.north()).getBlock();
-        Block south = world.getBlockState(pos.south()).getBlock();
-        Block east = world.getBlockState(pos.east()).getBlock();
+        List<Block> blockList = Arrays.asList(
+                Blocks.IRON_BLOCK, Blocks.IRON_BLOCK, Blocks.GLASS,
+                Blocks.COBBLESTONE_WALL, BlockRegistry.pressCore, Blocks.COBBLESTONE_WALL,
+                Blocks.COBBLESTONE_WALL, Blocks.HOPPER, Blocks.IRON_BLOCK
+        );
 
-        if (!above.equals(Blocks.IRON_BLOCK)) {
-            player.sendStatusMessage(generateError(pos.up(), Blocks.IRON_BLOCK), true);
-            return 0;
+        int succBuild = -1;
+
+        for (int r = 0; r < 4; r++) {
+            if (checkMultiblock(r, pos, blockList, world)) {
+                succBuild = r;
+            }
         }
 
-        return 0;
+        if (succBuild < 0) {
+            player.sendStatusMessage(generateError(), true);
+        }
+
+        return succBuild;
     }
 
-    private ITextComponent generateError(BlockPos pos, Block expected) {
+    private static boolean checkMultiblock(int typ, BlockPos pos, List<Block> blockList, World world) {
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                BlockPos npos;
+                Block checkBlock;
+                if (typ == 0) {
+                    npos = pos.add(x - 1, y - 1, 0);
+                    checkBlock = blockList.get(((2 - y) * 3) + x);
+                } else if (typ == 1) {
+                    npos = pos.add(x - 1, y - 1, 0);
+                    checkBlock = blockList.get(((2 - y) * 3) + (2 - x));
+                } else if (typ == 2) {
+                    npos = pos.add(0, y - 1, x - 1);
+                    checkBlock = blockList.get(((2 - y) * 3) + x);
+                } else {
+                    npos = pos.add(0, y - 1, x - 1);
+                    checkBlock = blockList.get(((2 - y) * 3) + (2 - x));
+                }
+                if (world.getBlockState(npos).getBlock() != checkBlock) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static ITextComponent generateError() {
         // TODO: Localize
-        String str = String.format("Block at %d %d %d should be %s", pos.getX(), pos.getY(), pos.getZ(), expected.getLocalizedName());
-        TextComponentString errMsg = new TextComponentString(str);
+        TextComponentString errMsg = new TextComponentString("Invalid structure!");
         errMsg.getStyle().setColor(TextFormatting.RED);
         errMsg.getStyle().setBold(true);
         return errMsg;
