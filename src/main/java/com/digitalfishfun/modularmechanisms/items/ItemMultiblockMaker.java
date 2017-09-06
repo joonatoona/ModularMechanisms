@@ -17,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
@@ -65,7 +66,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
         if (succBuild < 0) {
             if (world.isRemote)
-                player.sendStatusMessage(new TextComponentString("Invalid Structure"), true);
+                player.sendStatusMessage(new TextComponentTranslation("text.structure.invalid"), true);
         } else {
             buildMultiblock(succBuild, world, pos, blockList);
         }
