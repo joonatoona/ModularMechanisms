@@ -6,9 +6,11 @@
 package com.digitalfishfun.modularmechanisms.blocks.multiblock;
 
 import com.digitalfishfun.modularmechanisms.blocks.BaseTileEntity;
-import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
 import com.digitalfishfun.modularmechanisms.utils.MMLogger;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,8 +25,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
+
+    public static final IProperty<Integer> POS = PropertyInteger.create("pos", 0, 8);
+
     public BlockMultiblockBase(String name) {
         super(name, Material.IRON);
+        setDefaultState(blockState.getBaseState().withProperty(POS, 0));
     }
 
     @Override
@@ -79,5 +85,15 @@ public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
 
         world.setBlockToAir(pos);
         world.removeTileEntity(pos);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] {POS});
     }
 }

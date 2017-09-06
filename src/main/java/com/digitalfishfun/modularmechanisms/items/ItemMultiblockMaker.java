@@ -6,6 +6,7 @@
 package com.digitalfishfun.modularmechanisms.items;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
+import com.digitalfishfun.modularmechanisms.blocks.multiblock.BlockPressComponent;
 import com.digitalfishfun.modularmechanisms.blocks.multiblock.TileEntityMultiblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -118,7 +119,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
                 IBlockState newBlock = BlockRegistry.pressComponent.getDefaultState();
 
-                world.setBlockState(npos, newBlock, 3);
+                world.setBlockState(npos, newBlock.withProperty(BlockPressComponent.POS, bPos), 3);
 
                 TileEntityMultiblock tent = BlockRegistry.pressComponent.getTileEntity(world, npos);
 

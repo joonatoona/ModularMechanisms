@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/planks_oak"
+    }
+  },
+  "variants": {
+    "pos": {
+      0: {
+        "textures": {
+          "all": "modularmechanisms:blocks/press_core"
+        }
+      },
+      1: {
+        "textures": {
+          "all": "blocks/gold_block"
+        }
+      }
+    }
+  }
+}
