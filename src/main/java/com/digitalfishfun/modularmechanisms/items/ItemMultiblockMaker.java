@@ -31,7 +31,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float x, float y, float z) {
         if (world.getBlockState(pos).getBlock().equals(BlockRegistry.multiBlock)) {
             TileEntityMultiblock mb = BlockRegistry.multiBlock.getTileEntity(world, pos);
-            player.sendMessage(new TextComponentString(String.format("%s MACHINE: %s BLOCK: %d", world.isRemote ? "C": "S", mb.getBase(), mb.getIndex())));
+            player.sendMessage(new TextComponentString(String.format("%s BLOCK: %s INDEX: %d", world.isRemote ? "C": "S", mb.getBase(), mb.getIndex())));
         }
 
         if (world.getBlockState(pos).getBlock().equals(BlockRegistry.pressCore)) {
@@ -65,7 +65,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
             if (world.isRemote)
                 player.sendStatusMessage(new TextComponentString("Invalid Structure"), true);
         } else {
-            buildMultiblock(succBuild, world, pos);
+            buildMultiblock(succBuild, world, pos, blockList);
         }
 
         return succBuild;
@@ -97,7 +97,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
         return true;
     }
 
-    private void buildMultiblock(int rot, World world, BlockPos pos) {
+    private void buildMultiblock(int rot, World world, BlockPos pos, List<Block> blockList) {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 BlockPos npos;
@@ -122,7 +122,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
                 TileEntityMultiblock tent = BlockRegistry.multiBlock.getTileEntity(world, npos);
 
-                tent.setBaseBlock("press");
+                tent.setBaseBlock(blockList.get(bPos).getRegistryName().toString());
                 tent.setIndex(bPos);
             }
         }

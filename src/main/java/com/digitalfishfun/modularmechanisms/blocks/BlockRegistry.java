@@ -5,7 +5,7 @@
 
 package com.digitalfishfun.modularmechanisms.blocks;
 
-import com.digitalfishfun.modularmechanisms.blocks.multiblock.BlockMultiblock;
+import com.digitalfishfun.modularmechanisms.blocks.multiblock.BlockMultiblockBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class BlockRegistry {
 
     public static BlockPressCore pressCore = new BlockPressCore();
-    public static BlockMultiblock multiBlock = new BlockMultiblock();
+    public static BlockMultiblockBase multiBlock = new BlockMultiblockBase();
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
