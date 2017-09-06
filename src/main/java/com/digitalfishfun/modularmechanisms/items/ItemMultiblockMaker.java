@@ -124,6 +124,8 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
                 tent.setBaseBlock(blockList.get(bPos).getRegistryName().toString());
                 tent.setIndex(bPos);
+                tent.setParent(pos);
+                tent.setRotation(rot);
             }
         }
     }

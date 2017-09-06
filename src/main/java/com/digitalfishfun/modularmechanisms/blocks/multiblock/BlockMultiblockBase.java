@@ -50,13 +50,34 @@ public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
         TileEntityMultiblock ent = BlockRegistry.multiBlock.getTileEntity(world, pos);
         MMLogger.info(ent.getBase());
         drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ent.getBase())), 1));
-        World wrld = (World)world;
-        wrld.removeTileEntity(pos);
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-        worldIn.setBlockToAir(pos);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(world, player, pos, state, te, stack);
+
+        TileEntityMultiblock ent = (TileEntityMultiblock)te;
+
+        int rot = ent.getRotation();
+        BlockPos parentPos = ent.getParentPos();
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                BlockPos npos;
+
+                if (rot == 0 || rot == 1) {
+                    npos = parentPos.add(x - 1, y - 1, 0);
+                } else {
+                    npos = parentPos.add(0, y - 1, x - 1);
+                }
+
+                TileEntityMultiblock blk = BlockRegistry.multiBlock.getTileEntity(world, npos);
+                if (blk == null) continue;
+                blk.revertBlock(npos, world);
+            }
+        }
+
+        world.setBlockToAir(pos);
+        world.removeTileEntity(pos);
     }
 }

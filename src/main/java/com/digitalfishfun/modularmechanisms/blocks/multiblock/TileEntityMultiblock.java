@@ -9,15 +9,29 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class TileEntityMultiblock extends TileEntity {
     private String baseBlock;
     private int multiPos;
 
+    private BlockPos parentPos;
+    private int rotation;
+
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setString("base", baseBlock);
         compound.setInteger("pos", multiPos);
+
+        compound.setInteger("parentx", parentPos.getX());
+        compound.setInteger("parenty", parentPos.getY());
+        compound.setInteger("parentz", parentPos.getZ());
+
+        compound.setInteger("rot", rotation);
+
         return super.writeToNBT(compound);
     }
 
@@ -25,6 +39,14 @@ public class TileEntityMultiblock extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         baseBlock = compound.getString("base");
         multiPos = compound.getInteger("pos");
+
+        int x = compound.getInteger("parentx");
+        int y = compound.getInteger("parenty");
+        int z = compound.getInteger("parentz");
+
+        parentPos = new BlockPos(x, y, z);
+        rotation = compound.getInteger("rot");
+
         super.readFromNBT(compound);
     }
 
@@ -53,6 +75,14 @@ public class TileEntityMultiblock extends TileEntity {
         return multiPos;
     }
 
+    public int getRotation() {
+        return rotation;
+    }
+
+    public BlockPos getParentPos() {
+        return parentPos;
+    }
+
     public void setBaseBlock(String base) {
         baseBlock = base;
         markDirty();
@@ -61,5 +91,20 @@ public class TileEntityMultiblock extends TileEntity {
     public void setIndex(int pos) {
         multiPos = pos;
         markDirty();
+    }
+
+    public void setParent(BlockPos pos) {
+        parentPos = pos;
+        markDirty();
+    }
+
+    public void setRotation(int rot) {
+        rotation = rot;
+        markDirty();
+    }
+
+    public void revertBlock(BlockPos pos, World world) {
+        world.setBlockState(pos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(baseBlock)).getDefaultState());
+        world.removeTileEntity(pos);
     }
 }
