@@ -3,18 +3,34 @@
   "defaults": {
     "textures": {
       "all": "blocks/planks_oak"
-    }
+    },
+    "model": "cube_all"
   },
   "variants": {
     "pos": {
-      0: {
+      "0": {
         "textures": {
-          "all": "modularmechanisms:blocks/press_core"
+          "all": "blocks/iron_block"
         }
       },
-      1: {
+      "1": {
         "textures": {
-          "all": "blocks/gold_block"
+          "all": "blocks/iron_block"
+        }
+      },
+      "2": {
+        "textures": {
+          "all": "blocks/glass"
+        }
+      },
+      "3": {
+        "textures": {
+          "all": "blocks/cobblestone"
+        }
+      },
+      "4": {
+        "textures": {
+          "all": "modularmechanisms:blocks/press_core"
         }
       }
     }
