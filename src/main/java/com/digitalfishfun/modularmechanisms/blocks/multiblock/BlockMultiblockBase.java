@@ -23,8 +23,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import javax.annotation.Nullable;
 
 public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
-    public BlockMultiblockBase() {
-        super("multiblock_block", Material.IRON);
+    public BlockMultiblockBase(String name) {
+        super(name, Material.IRON);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        TileEntityMultiblock ent = BlockRegistry.multiBlock.getTileEntity(world, pos);
+        TileEntityMultiblock ent = super.getTileEntity(world, pos);
         MMLogger.info(ent.getBase());
         drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ent.getBase())), 1));
     }
@@ -71,7 +71,7 @@ public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
                     npos = parentPos.add(0, y - 1, x - 1);
                 }
 
-                TileEntityMultiblock blk = BlockRegistry.multiBlock.getTileEntity(world, npos);
+                TileEntityMultiblock blk = super.getTileEntity(world, npos);
                 if (blk == null) continue;
                 blk.revertBlock(npos, world);
             }

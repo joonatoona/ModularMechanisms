@@ -5,7 +5,7 @@
 
 package com.digitalfishfun.modularmechanisms.blocks;
 
-import com.digitalfishfun.modularmechanisms.blocks.multiblock.BlockMultiblockBase;
+import com.digitalfishfun.modularmechanisms.blocks.multiblock.BlockPressComponent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -14,15 +14,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class BlockRegistry {
 
     public static BlockPressCore pressCore = new BlockPressCore();
-    public static BlockMultiblockBase multiBlock = new BlockMultiblockBase();
+    public static BlockPressComponent pressComponent = new BlockPressComponent();
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
                 pressCore,
-                multiBlock
+                pressComponent
         );
 
-        GameRegistry.registerTileEntity(multiBlock.getTileEntityClass(), multiBlock.getRegistryName().toString());
+        GameRegistry.registerTileEntity(pressComponent.getTileEntityClass(), pressComponent.getRegistryName().toString());
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {

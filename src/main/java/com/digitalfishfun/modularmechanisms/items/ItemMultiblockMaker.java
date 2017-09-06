@@ -29,9 +29,9 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float x, float y, float z) {
-        if (world.getBlockState(pos).getBlock().equals(BlockRegistry.multiBlock)) {
-            TileEntityMultiblock mb = BlockRegistry.multiBlock.getTileEntity(world, pos);
-            player.sendMessage(new TextComponentString(String.format("%s BLOCK: %s INDEX: %d", world.isRemote ? "C": "S", mb.getBase(), mb.getIndex())));
+        if (world.getBlockState(pos).getBlock().equals(BlockRegistry.pressComponent) && world.isRemote) {
+            TileEntityMultiblock mb = BlockRegistry.pressComponent.getTileEntity(world, pos);
+            player.sendMessage(new TextComponentString(String.format("%s BLOCK: %s INDEX: %d", world.isRemote ? "[C]": "[S]", mb.getBase(), mb.getIndex())));
         }
 
         if (world.getBlockState(pos).getBlock().equals(BlockRegistry.pressCore)) {
@@ -116,11 +116,11 @@ public class ItemMultiblockMaker extends BaseMMItem {
                     bPos = ((2 - y) * 3) + (2 - x);
                 }
 
-                IBlockState newBlock = BlockRegistry.multiBlock.getDefaultState();
+                IBlockState newBlock = BlockRegistry.pressComponent.getDefaultState();
 
                 world.setBlockState(npos, newBlock, 3);
 
-                TileEntityMultiblock tent = BlockRegistry.multiBlock.getTileEntity(world, npos);
+                TileEntityMultiblock tent = BlockRegistry.pressComponent.getTileEntity(world, npos);
 
                 tent.setBaseBlock(blockList.get(bPos).getRegistryName().toString());
                 tent.setIndex(bPos);
