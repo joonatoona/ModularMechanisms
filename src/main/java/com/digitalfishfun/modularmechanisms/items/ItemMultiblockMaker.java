@@ -26,6 +26,7 @@ public class ItemMultiblockMaker extends BaseMMItem {
 
     public ItemMultiblockMaker() {
         super("multiblock_maker");
+        setMaxStackSize(1);
     }
 
     @Override
