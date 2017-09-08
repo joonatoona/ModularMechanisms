@@ -1,37 +1,35 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "textures": {
-      "all": "blocks/planks_oak"
-    },
-    "model": "cube_all"
   },
   "variants": {
     "pos": {
       "0": {
-        "textures": {
-          "all": "blocks/iron_block"
-        }
+        "model": "modularmechanisms:press_leg_top"
       },
       "1": {
-        "textures": {
-          "all": "blocks/iron_block"
-        }
+        "model": "modularmechanisms:press_top"
       },
       "2": {
-        "textures": {
-          "all": "blocks/glass"
-        }
+        "model": "modularmechanisms:press_leg_top"
       },
       "3": {
-        "textures": {
-          "all": "blocks/cobblestone"
-        }
+        "model": "modularmechanisms:press_leg_center"
       },
       "4": {
-        "textures": {
-          "all": "modularmechanisms:blocks/press_core"
-        }
+        "model": "modularmechanisms:press_head"
+      },
+      "5": {
+        "model": "modularmechanisms:press_leg_center"
+      },
+      "6": {
+        "model": "modularmechanisms:press_leg_bottom"
+      },
+      "7": {
+        "model": "modularmechanisms:press_base"
+      },
+      "8": {
+        "model": "modularmechanisms:press_leg_bottom"
       }
     }
   }
