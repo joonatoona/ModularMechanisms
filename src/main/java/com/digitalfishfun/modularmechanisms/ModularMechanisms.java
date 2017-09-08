@@ -7,16 +7,21 @@ package com.digitalfishfun.modularmechanisms;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
 import com.digitalfishfun.modularmechanisms.client.MMTab;
+import com.digitalfishfun.modularmechanisms.config.ConfigManager;
 import com.digitalfishfun.modularmechanisms.items.ItemPressHead;
 import com.digitalfishfun.modularmechanisms.items.ItemRegistry;
 import com.digitalfishfun.modularmechanisms.proxy.CommonProxy;
 import com.digitalfishfun.modularmechanisms.recipes.RecipePressHead;
 import com.digitalfishfun.modularmechanisms.utils.MMLogger;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +33,10 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
 @Mod(modid = ModularMechanisms.MODID, version = ModularMechanisms.VERSION)
 public class ModularMechanisms
 {
@@ -36,6 +45,8 @@ public class ModularMechanisms
 
     public static final MMTab creativeTab = new MMTab();
 
+    public static ConfigManager config;
+
     @SidedProxy(serverSide = "com.digitalfishfun.modularmechanisms.proxy.CommonProxy", clientSide = "com.digitalfishfun.modularmechanisms.proxy.ClientProxy")
     public static CommonProxy proxy;
 
@@ -43,6 +54,8 @@ public class ModularMechanisms
     public void preInit(FMLPreInitializationEvent event) {
         MMLogger.logger = event.getModLog();
         ForgeRegistries.RECIPES.register(new RecipePressHead());
+
+        config = new ConfigManager(event.getSuggestedConfigurationFile());
     }
 
     @Mod.EventHandler

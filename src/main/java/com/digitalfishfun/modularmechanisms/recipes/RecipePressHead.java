@@ -5,7 +5,10 @@
 
 package com.digitalfishfun.modularmechanisms.recipes;
 
+import com.digitalfishfun.modularmechanisms.ModularMechanisms;
 import com.digitalfishfun.modularmechanisms.items.ItemRegistry;
+import com.digitalfishfun.modularmechanisms.utils.MMLogger;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -23,17 +26,27 @@ public class RecipePressHead implements IRecipe {
 
     @Override
     public boolean matches(InventoryCrafting inv, World worldIn) {
-        List<Item> validParts = Arrays.asList(
-                Items.IRON_INGOT, Items.GOLD_INGOT, Items.DIAMOND
+
+        Item chosenItem = inv.getStackInSlot(8).getItem();
+
+        if (!ModularMechanisms.config.headMaterials.contains(chosenItem)) return false;
+
+        List<Item> recipe = Arrays.asList(
+                Items.AIR, Item.getItemFromBlock(Blocks.COBBLESTONE_WALL), Items.AIR,
+                Items.IRON_INGOT, Item.getItemFromBlock(Blocks.IRON_BARS), Items.IRON_INGOT,
+                chosenItem, chosenItem, chosenItem
         );
 
-        Item chosenItem = inv.getStackInSlot(0).getItem();
-        return validParts.contains(chosenItem);
+        for (int i = 0; i < 9; i++) {
+            if (inv.getStackInSlot(i).getItem() != recipe.get(i)) return false;
+        }
+
+        return true;
     }
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inv) {
-        Item materialUsed = inv.getStackInSlot(0).getItem();
+        Item materialUsed = inv.getStackInSlot(8).getItem();
         ItemStack stack = new ItemStack(ItemRegistry.pressHead);
         stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setString("base", materialUsed.getRegistryName().toString());
