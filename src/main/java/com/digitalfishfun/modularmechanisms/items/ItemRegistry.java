@@ -11,15 +11,18 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ItemRegistry {
 
     public static ItemMultiblockMaker multiblockMaker = new ItemMultiblockMaker();
+    public static ItemPressHead pressHead = new ItemPressHead();
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
-                multiblockMaker
+                multiblockMaker,
+                pressHead
         );
     }
 
     public static void registerModels() {
         multiblockMaker.registerItemModel();
+        pressHead.registerItemModel();
     }
 
 }

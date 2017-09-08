@@ -7,11 +7,16 @@ package com.digitalfishfun.modularmechanisms;
 
 import com.digitalfishfun.modularmechanisms.blocks.BlockRegistry;
 import com.digitalfishfun.modularmechanisms.client.MMTab;
+import com.digitalfishfun.modularmechanisms.items.ItemPressHead;
 import com.digitalfishfun.modularmechanisms.items.ItemRegistry;
 import com.digitalfishfun.modularmechanisms.proxy.CommonProxy;
+import com.digitalfishfun.modularmechanisms.recipes.RecipePressHead;
 import com.digitalfishfun.modularmechanisms.utils.MMLogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +24,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = ModularMechanisms.MODID, version = ModularMechanisms.VERSION)
 public class ModularMechanisms
@@ -34,11 +42,11 @@ public class ModularMechanisms
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MMLogger.logger = event.getModLog();
+        ForgeRegistries.RECIPES.register(new RecipePressHead());
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
     }
 
     // TODO: Move this into a separate class

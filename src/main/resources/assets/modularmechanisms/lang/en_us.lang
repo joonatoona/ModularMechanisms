@@ -6,6 +6,9 @@ tile.press_core.name=Modular Press Core
 
 # Items
 item.multiblock_maker.name=Chronic Screwdriver
+## Note: Material used is prepended to this
+item.press_head.name=Press Head
 
 # Texts
 text.structure.invalid=Invalid Structure!
+text.item.invalid=Missing Metadata!

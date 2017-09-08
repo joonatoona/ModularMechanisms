@@ -5,6 +5,7 @@
 
 package com.digitalfishfun.modularmechanisms.blocks.multiblock;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class TileEntityMultiblock extends TileEntity {
-    private String baseBlock;
+    private Block baseBlock;
     private int multiPos;
 
     private BlockPos parentPos;
@@ -23,7 +24,7 @@ public class TileEntityMultiblock extends TileEntity {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setString("base", baseBlock);
+        compound.setString("base", baseBlock.getRegistryName().toString());
         compound.setInteger("pos", multiPos);
 
         compound.setInteger("parentx", parentPos.getX());
@@ -37,7 +38,7 @@ public class TileEntityMultiblock extends TileEntity {
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        baseBlock = compound.getString("base");
+        baseBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(compound.getString("base")));
         multiPos = compound.getInteger("pos");
 
         int x = compound.getInteger("parentx");
@@ -67,7 +68,7 @@ public class TileEntityMultiblock extends TileEntity {
         this.readFromNBT(packet.getNbtCompound());
     }
 
-    public String getBase() {
+    public Block getBase() {
         return baseBlock;
     }
 
@@ -83,7 +84,7 @@ public class TileEntityMultiblock extends TileEntity {
         return parentPos;
     }
 
-    public void setBaseBlock(String base) {
+    public void setBaseBlock(Block base) {
         baseBlock = base;
         markDirty();
     }
@@ -104,7 +105,7 @@ public class TileEntityMultiblock extends TileEntity {
     }
 
     public void revertBlock(BlockPos pos, World world) {
-        world.setBlockState(pos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(baseBlock)).getDefaultState());
+        world.setBlockState(pos, baseBlock.getDefaultState());
         world.removeTileEntity(pos);
     }
 }

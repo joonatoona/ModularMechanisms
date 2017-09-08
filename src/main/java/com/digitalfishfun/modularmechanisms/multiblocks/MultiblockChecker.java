@@ -96,7 +96,7 @@ public class MultiblockChecker {
 
                 TileEntityMultiblock tent = BlockRegistry.pressComponent.getTileEntity(world, npos);
 
-                tent.setBaseBlock(blockList.get(bPos).getRegistryName().toString());
+                tent.setBaseBlock(blockList.get(bPos));
                 tent.setIndex(bPos);
                 tent.setParent(pos);
                 tent.setRotation(rot);

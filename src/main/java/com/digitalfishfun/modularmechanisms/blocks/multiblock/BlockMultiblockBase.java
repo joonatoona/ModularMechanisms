@@ -58,7 +58,7 @@ public class BlockMultiblockBase extends BaseTileEntity<TileEntityMultiblock> {
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         TileEntityMultiblock ent = super.getTileEntity(world, pos);
         MMLogger.info(ent.getBase());
-        drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ent.getBase())), 1));
+        drops.add(new ItemStack(ent.getBase(), 1));
     }
 
     @Override
